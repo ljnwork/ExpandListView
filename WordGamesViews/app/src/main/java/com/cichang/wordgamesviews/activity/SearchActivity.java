@@ -17,8 +17,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.cichang.wordgamesviews.R;
-import com.cichang.wordgamesviews.adapter.SearchAdapter;
 import com.cichang.wordgamesviews.adapter.ResultBooksAdapter;
+import com.cichang.wordgamesviews.adapter.SearchAdapter;
 import com.cichang.wordgamesviews.moudle.BookItemInfo;
 import com.cichang.wordgamesviews.moudle.LanguageBooksInfo;
 import com.cichang.wordgamesviews.moudle.SearchResultBooksInfo;
@@ -37,9 +37,9 @@ public class SearchActivity extends Activity implements View.OnClickListener {
     private Button mAddBooksButton;
     private TextView mResultBooksCountTextView;
     private View mSearchView;
-    private View mSearchResultView;
+    private View mResultView;
     private ListView mResultBooksListView;
-    private boolean mIsSearchResultShowing = false;
+    private boolean mIsResultShowing = false;
     private final static String[] HOT_WORDS = {"四级", "托福", "雅思", "剑桥少儿", "新概念英语", "走遍美国", "日语", "泰语", "韩语", "五十音"};
 
     private List<String> mSearchWordList = new ArrayList<String>();
@@ -68,37 +68,41 @@ public class SearchActivity extends Activity implements View.OnClickListener {
             mHotWordsFlowLayout.addView(hotWordTextView);
         }
 
-        mSearchWordList.add("小学英语");
-        mSearchWordList.add("人教版小学英语一年级");
-        mSearchWordList.add("人教版小学英语二年级");
-        mSearchWordList.add("小学配图词汇");
-        mSearchWordList.add("牛津小学英语");
+        initSearchWordList();
 
-        mSearchAdapter = new SearchAdapter(mSearchWordList, "小学", this);
+        mSearchAdapter = new SearchAdapter(mSearchWordList, "abc", this);
 
         mSearchListView.setAdapter(mSearchAdapter);
+    }
+
+    private void initSearchWordList() {
+        mSearchWordList.add("小学abc英语");
+        mSearchWordList.add("人教版小学英语aac一年级");
+        mSearchWordList.add("人教版小学英语abc二年级");
+        mSearchWordList.add("小学abc配图词汇");
+        mSearchWordList.add("牛津小学ab英语");
     }
 
     private SearchResultBooksInfo getBooksInfo() {
         List<LanguageBooksInfo> booksInfos = new ArrayList<LanguageBooksInfo>();
 
         List<BookItemInfo> englishBooks = new ArrayList<BookItemInfo>();
-        englishBooks.add(new BookItemInfo("", "学英语绕不过的1000词", "125/1000"));
-        englishBooks.add(new BookItemInfo("", "学英语绕不过的2000词", "125/1000"));
-        englishBooks.add(new BookItemInfo("", "学英语绕不过的3000词", "125/1000"));
-        englishBooks.add(new BookItemInfo("", "学英语绕不过的4000词", "125/1000"));
+        englishBooks.add(new BookItemInfo("", "abc1000词", "125/1000"));
+        englishBooks.add(new BookItemInfo("", "abc2000词", "125/1000"));
+        englishBooks.add(new BookItemInfo("", "abc3000词", "125/1000"));
+        englishBooks.add(new BookItemInfo("", "abc4000词", "125/1000"));
         booksInfos.add(new LanguageBooksInfo("英语", false, englishBooks));
 
         List<BookItemInfo> jpBooks = new ArrayList<BookItemInfo>();
-        jpBooks.add(new BookItemInfo("", "学日语绕不过的1000词", "125/1000"));
-        jpBooks.add(new BookItemInfo("", "学日语绕不过的2000词", "125/1000"));
-        jpBooks.add(new BookItemInfo("", "学日语绕不过的3000词", "125/1000"));
-        jpBooks.add(new BookItemInfo("", "学日语绕不过的4000词", "125/1000"));
+        jpBooks.add(new BookItemInfo("", "abc1000词", "125/1000"));
+        jpBooks.add(new BookItemInfo("", "abc2000词", "125/1000"));
+        jpBooks.add(new BookItemInfo("", "abc3000词", "125/1000"));
+        jpBooks.add(new BookItemInfo("", "abc4000词", "125/1000"));
         booksInfos.add(new LanguageBooksInfo("日语", false, jpBooks));
 
         List<BookItemInfo> frBooks = new ArrayList<BookItemInfo>();
-        frBooks.add(new BookItemInfo("", "学法语绕不过的1000词", "125/1000"));
-        frBooks.add(new BookItemInfo("", "学法语绕不过的2000词", "125/1000"));
+        frBooks.add(new BookItemInfo("", "abc1000词", "125/1000"));
+        frBooks.add(new BookItemInfo("", "abc2000词", "125/1000"));
         booksInfos.add(new LanguageBooksInfo("法语", true, frBooks));
 
         return new SearchResultBooksInfo(booksInfos);
@@ -136,12 +140,27 @@ public class SearchActivity extends Activity implements View.OnClickListener {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
-                if (!TextUtils.isEmpty(charSequence) || mIsSearchResultShowing) {
+                if (!TextUtils.isEmpty(charSequence)) {
+                    mSearchAdapter.setSearchString(mSearchEditText.getText().toString());
+
+                    ArrayList removeList = new ArrayList();
+                    for (String searchWord : mSearchWordList) {
+                        if (!searchWord.contains(mSearchEditText.getText().toString().trim())) {
+                            removeList.add(searchWord);
+                        }
+                    }
+                    mSearchWordList.removeAll(removeList);
+
+                    mSearchAdapter.notifyDataSetChanged();
                     mHotWordsFlowLayout.setVisibility(View.INVISIBLE);
                     mSearchView.setVisibility(View.VISIBLE);
                 } else {
-                    mHotWordsFlowLayout.setVisibility(View.VISIBLE);
                     mSearchView.setVisibility(View.INVISIBLE);
+                    if (mResultView.getVisibility() == View.VISIBLE) {
+                        mHotWordsFlowLayout.setVisibility(View.INVISIBLE);
+                    } else {
+                        mHotWordsFlowLayout.setVisibility(View.VISIBLE);
+                    }
                 }
             }
 
@@ -158,7 +177,7 @@ public class SearchActivity extends Activity implements View.OnClickListener {
         mHotWordsFlowLayout = (FlowLayout) findViewById(R.id.fl_hot_words);
         mSearchListView = (ListView) findViewById(R.id.lv_search_result_tips);
         mSearchView = findViewById(R.id.ll_search_view);
-        mSearchResultView = findViewById(R.id.ll_search_result_view);
+        mResultView = findViewById(R.id.ll_search_result_view);
         mResultBooksListView = (ListView) findViewById(R.id.lv_search_result_books);
         mAddBooksButton = (Button) findViewById(R.id.bt_add_books);
         mResultBooksCountTextView = (TextView) findViewById(R.id.tv_search_result_count);
@@ -173,8 +192,8 @@ public class SearchActivity extends Activity implements View.OnClickListener {
             case R.id.bt_search:
                 mHotWordsFlowLayout.setVisibility(View.INVISIBLE);
                 mSearchView.setVisibility(View.INVISIBLE);
-                mSearchResultView.setVisibility(View.VISIBLE);
-                mIsSearchResultShowing = true;
+                mResultView.setVisibility(View.VISIBLE);
+                mIsResultShowing = true;
                 boolean flag = new Random().nextBoolean();
                 if (true) {
                     mResultBooksListView.setVisibility(View.VISIBLE);

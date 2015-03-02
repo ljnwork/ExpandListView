@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="110dp">
+
+    <ImageView
+        android:id="@+id/book_layout_bg"
+        android:layout_width="67dp"
+        android:layout_height="90dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="18dp"
+        android:layout_marginTop="10dp"
+        android:scaleType="fitXY"
+        android:background="#ffff88"/>
+
+    <TextView
+        android:id="@+id/book_name"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@+id/book_layout_bg"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:text="英语零基础大学六级"
+        android:textSize="17sp" />
+
+    <TextView
+        android:id="@+id/tv_best_book_word_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/book_name"
+        android:layout_toRightOf="@+id/book_layout_bg"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:text="156词"
+        android:textSize="12sp" />
+
+</RelativeLayout>

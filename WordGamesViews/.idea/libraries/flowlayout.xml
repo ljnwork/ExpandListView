@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="flowlayout">
+    <CLASSES />
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/app/src/main/libs/flowlayout/java" />
+    </SOURCES>
+  </library>
+</component>

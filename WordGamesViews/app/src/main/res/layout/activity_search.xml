@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/bt_search"
+        android:layout_alignParentRight="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="search" />
+
+    <EditText
+        android:singleLine="true"
+        android:layout_marginTop="5dp"
+        android:id="@+id/et"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/bt_search" />
+
+    <com.cichang.wordgamesviews.views.FlowLayout
+        android:layout_margin="5dp"
+        android:id="@+id/fl_hot_words"
+        android:layout_below="@id/et"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="start|top" />
+
+    <LinearLayout
+        android:layout_below="@id/et"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:visibility="invisible"
+        android:id="@+id/ll_search_result_view">
+
+        <TextView
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="10dp"
+            android:id="@+id/tv_search_result_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableBottom="@color/gray"
+            android:text="0条搜索结果" />
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/lv_search_result_books" />
+
+            <RelativeLayout
+                android:layout_alignParentBottom="true"
+                android:id="@+id/rl_add_books"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+
+                <TextView
+                    android:layout_marginTop="5dp"
+                    android:id="@+id/tv_tips"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:text="没有找到想要的词书？"
+                    android:layout_centerHorizontal="true" />
+
+                <TextView
+                    android:layout_marginTop="5dp"
+                    android:layout_centerHorizontal="true"
+                    android:text="通知我们来添加"
+                    android:textSize="14sp"
+                    android:layout_below="@id/tv_tips"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </RelativeLayout>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:id="@+id/bt_add_books" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:background="@color/white"
+        android:visibility="gone"
+        android:id="@+id/ll_search_view"
+        android:layout_below="@id/et"
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <ListView
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:headerDividersEnabled="false"
+            android:footerDividersEnabled="true"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:dividerHeight="1dp"
+            android:id="@+id/lv_search_result_tips"></ListView>
+
+        <Button
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center"
+            android:text="清空搜索记录"
+            android:id="@+id/bt_clear_result"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+</RelativeLayout>

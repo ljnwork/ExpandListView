@@ -6,7 +6,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.cichang.wordgamesviews.R;
 import com.cichang.wordgamesviews.moudle.BookItemInfo;
@@ -18,7 +17,7 @@ import java.util.ArrayList;
 /**
  * Created by HJ on 2015/2/27.
  */
-public class SearchResultBooksAdapter extends BaseAdapter {
+public class ResultBooksAdapter extends BaseAdapter {
 
     private Context mContext;
     private SearchResultBooksInfo mBooksInfo;
@@ -27,9 +26,8 @@ public class SearchResultBooksAdapter extends BaseAdapter {
     private static final int TYPE_BOOK = 1;  //条目为词书
     private static final int TYPE_EXPAND = 2;  //条目为加载更多
     private static final int[] SEARCH_RESULT_ITEM_TYPES = {TYPE_LANGS, TYPE_BOOK, TYPE_EXPAND};
-    private OnNotifyDataSetChangedListener notifyDataSetChangedListener;
 
-    public SearchResultBooksAdapter(Context mContext, SearchResultBooksInfo mBooksInfo) {
+    public ResultBooksAdapter(Context mContext, SearchResultBooksInfo mBooksInfo) {
         this.mContext = mContext;
         this.mBooksInfo = mBooksInfo;
     }
@@ -125,7 +123,7 @@ public class SearchResultBooksAdapter extends BaseAdapter {
                 bookHolder.mBookNameTextView.setText(((BookItemInfo) mItemList.get(i)).getBookName());
                 break;
             case TYPE_EXPAND:
-                expandHolder.mExpandTextView.setText("展开更多");
+                expandHolder.mExpandTextView.setText("V 展开更多");
                 expandHolder.mRootExpandView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -172,17 +170,4 @@ public class SearchResultBooksAdapter extends BaseAdapter {
         return SEARCH_RESULT_ITEM_TYPES.length;
     }
 
-    @Override
-    public void notifyDataSetChanged() {
-        super.notifyDataSetChanged();
-        notifyDataSetChangedListener.notifyFinished();
-    }
-
-    public interface OnNotifyDataSetChangedListener{
-        void notifyFinished();
-    }
-
-    public void setOnNotifyDataSetChangedListener(OnNotifyDataSetChangedListener listener){
-        notifyDataSetChangedListener = listener;
-    }
 }

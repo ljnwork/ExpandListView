@@ -2,10 +2,12 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="50dp"
+    android:background="#ff9f9f9f"
+    android:layout_height="60dp"
     android:id="@+id/rl_expand_root">
 
     <TextView
+        android:layout_margin="10dp"
         android:id="@+id/tv_expand"
         android:text="v展开更多"
         android:layout_centerInParent="true"

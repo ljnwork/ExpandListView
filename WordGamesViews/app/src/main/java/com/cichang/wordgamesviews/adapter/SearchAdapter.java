@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * Created by HJ on 2015/2/27.
  */
-public class SearchResultAdapter extends BaseAdapter {
+public class SearchAdapter extends BaseAdapter {
 
     private List<String> mResultStringList;
     private String mSearchString;
@@ -23,7 +23,7 @@ public class SearchResultAdapter extends BaseAdapter {
     private static final String BLUE_START_TAG = "<font color='#0003FF'>";
     private static final String BLUE_END_TAG = "</font>";
 
-    public SearchResultAdapter(List<String> mResultStringList, String mSearchString, Context mContext) {
+    public SearchAdapter(List<String> mResultStringList, String mSearchString, Context mContext) {
         this.mResultStringList = mResultStringList;
         this.mSearchString = mSearchString;
         this.mContext = mContext;
